@@ -46,9 +46,11 @@
 		{ text: 'We build technical marvels.', muted: false },
 		{ text: 'They build character.', muted: true }
 	];
-	const TAGLINE_WORDS = TAGLINE_PARTS.flatMap((p) =>
-		p.text.split(' ').map((word) => ({ word, muted: p.muted }))
-	);
+	let _wordIdx = 0;
+	const TAGLINE_LINES = TAGLINE_PARTS.map((p) => ({
+		muted: p.muted,
+		words: p.text.split(' ').map((word) => ({ word, i: _wordIdx++ }))
+	}));
 
 	const TEAM = [
 		{
@@ -150,10 +152,14 @@
 		></span
 	>
 	<p class="tagline">
-		{#each TAGLINE_WORDS as item, i}
-			<span class="word" class:muted={item.muted}
-				><span class="word-inner" style="--i: {i}">{item.word}</span></span
-			>{' '}
+		{#each TAGLINE_LINES as line}
+			<span class="tagline-line" class:muted={line.muted}>
+				{#each line.words as item}
+					<span class="word"
+						><span class="word-inner" style="--i: {item.i}">{item.word}</span></span
+					>{' '}
+				{/each}
+			</span>
 		{/each}
 	</p>
 </section>
@@ -167,20 +173,20 @@
 	<div class="col-right">
 		<div class="projects-list">
 			<ProjectStrip
-				name="Doodledapp"
-				tagline="Stop waiting on developers to ship your contracts."
-				description={`Build, test, and deploy smart contracts visually.\nNo Solidity. No blockers.`}
-				href="https://doodledapp.com"
-				colors={['#3E74FF', '#24316E', '#0F142C', '#101114']}
-				screenshot="/dd-screenshot.jpg"
-			/>
-			<ProjectStrip
 				name="SessionSight"
 				tagline="Stop launching to crickets."
 				description="SessionSight is the marketing co-founder you wish you had. It runs your marketing, gets your product in front of the right people, and gives you answers instead of more questions."
 				href="https://sessionsight.com"
 				colors={['#FAF9F7', '#F6F4E7', '#FFF8CE', '#E1D58E']}
 				screenshot="/ss-screenshot.jpg"
+			/>
+			<ProjectStrip
+				name="Doodledapp"
+				tagline="Stop waiting on developers to ship your contracts."
+				description={`Build, test, and deploy smart contracts visually.\nNo Solidity. No blockers.`}
+				href="https://doodledapp.com"
+				colors={['#3E74FF', '#24316E', '#0F142C', '#101114']}
+				screenshot="/dd-screenshot.jpg"
 				align="left"
 			/>
 		</div>
@@ -344,12 +350,16 @@
 		font-size: min(40px, 2.6vw);
 		line-height: 1.3;
 		text-transform: uppercase;
-		white-space: nowrap;
 		color: #ffffff;
 		max-width: none;
 	}
 
-	.word.muted {
+	.tagline-line {
+		display: inline;
+		white-space: nowrap;
+	}
+
+	.tagline-line.muted {
 		color: #444;
 	}
 
@@ -732,6 +742,14 @@
 			padding-top: 40px;
 			padding-bottom: 40px;
 			gap: 20px;
+		}
+
+		.tagline {
+			font-size: min(4.8vw, 32px);
+		}
+
+		.tagline-line {
+			display: block;
 		}
 
 		.company {

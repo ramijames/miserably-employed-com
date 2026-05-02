@@ -101,6 +101,14 @@
 			gap: 20px;
 		}
 
+		.project-card {
+			margin-left: calc(-1 * (var(--gap-inner) + var(--gap-outer)));
+			margin-right: calc(-1 * (var(--gap-inner) + var(--gap-outer)));
+			border-radius: 0;
+			min-height: 0;
+			aspect-ratio: 4 / 5;
+		}
+
 		h2 {
 			font-size: 32px;
 		}
