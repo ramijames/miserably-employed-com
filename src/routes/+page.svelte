@@ -632,6 +632,7 @@
 	.contact-email {
 		color: var(--text);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+		overflow-wrap: anywhere;
 	}
 
 	.contact-email:hover {
@@ -765,6 +766,29 @@
 		.projects-intro {
 			flex-direction: column;
 			gap: 30px;
+		}
+
+		.contact .col-right {
+			gap: 50px;
+		}
+
+		.contact-row {
+			grid-template-columns: 1fr;
+			gap: 8px;
+			padding: 16px 0;
+		}
+
+		.contact-row dd {
+			font-size: 15px;
+		}
+
+		.form-row input,
+		.form-row textarea {
+			font-size: 16px;
+		}
+
+		.contact-form .button {
+			align-self: stretch;
 		}
 
 		.col-left {
