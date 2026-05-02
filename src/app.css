@@ -130,6 +130,34 @@ a:hover {
 	transform: none;
 }
 
+/* Loading spinner overlay for three.js scenes */
+.scene-loading {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+	z-index: 5;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.scene-loading::before {
+	content: '';
+	width: 36px;
+	height: 36px;
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-top-color: rgba(255, 255, 255, 0.65);
+	border-radius: 50%;
+	animation: scene-spin 0.9s linear infinite;
+}
+
+@keyframes scene-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 /* Scroll-triggered reveal */
 .reveal {
 	opacity: 0;

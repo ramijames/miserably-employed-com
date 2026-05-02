@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import ProjectStrip from '$lib/ProjectStrip.svelte';
 	import HeroScene from '$lib/HeroScene.svelte';
+	import LocationMap from '$lib/LocationMap.svelte';
 
 	onMount(() => {
 		const heroEl = document.querySelector<HTMLElement>('.hero');
@@ -167,13 +168,20 @@
 		<div class="projects-list">
 			<ProjectStrip
 				name="Doodledapp"
-				blurb="TODO: project blurb goes here"
+				tagline="Stop waiting on developers to ship your contracts."
+				description={`Build, test, and deploy smart contracts visually.\nNo Solidity. No blockers.`}
 				href="https://doodledapp.com"
+				colors={['#3E74FF', '#24316E', '#0F142C', '#101114']}
+				screenshot="/dd-screenshot.jpg"
 			/>
 			<ProjectStrip
 				name="SessionSight"
-				blurb="TODO: project blurb goes here"
+				tagline="Stop launching to crickets."
+				description="SessionSight is the marketing co-founder you wish you had. It runs your marketing, gets your product in front of the right people, and gives you answers instead of more questions."
 				href="https://sessionsight.com"
+				colors={['#FAF9F7', '#F6F4E7', '#FFF8CE', '#E1D58E']}
+				screenshot="/ss-screenshot.jpg"
+				align="left"
 			/>
 		</div>
 	</div>
@@ -274,18 +282,19 @@
 			<div class="contact-row">
 				<dt>Email</dt>
 				<dd>
-					<a class="contact-email" href="mailto:hello@miserablyemployed.com"
-						>hello@miserablyemployed.com</a
+					<a class="contact-email" href="mailto:support@miserablyemployed.com"
+						>support@miserablyemployed.com</a
 					>
 				</dd>
 			</div>
 			<div class="contact-row">
-				<dt>Address</dt>
-				<dd>TODO: Company address</dd>
-			</div>
-			<div class="contact-row">
-				<dt>Phone</dt>
-				<dd>TODO: Company phone</dd>
+				<dt>Locations</dt>
+				<dd>
+					<div class="locations">
+						<LocationMap lat={26.5629} lng={-81.9495} label="Cape Coral, FL" />
+						<LocationMap lat={42.3318} lng={-71.1212} label="Brookline, MA" />
+					</div>
+				</dd>
 			</div>
 		</dl>
 	</div>
@@ -389,7 +398,6 @@
 
 	/* Left column shared styles */
 	.col-left h2,
-	.col-left h3,
 	.col-left p {
 		font-family: var(--font-sans);
 		font-size: 17px;
@@ -399,8 +407,7 @@
 		margin: 0;
 	}
 
-	.col-left h2,
-	.col-left h3 {
+	.col-left h2 {
 		font-weight: 700;
 	}
 
@@ -443,11 +450,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
-	}
-
-	.company-block h3 {
-		font-size: 32px;
-		line-height: 1.2;
 	}
 
 	/* Team */
@@ -577,13 +579,6 @@
 		gap: 80px;
 	}
 
-	.contact-blurb {
-		font-size: 18px;
-		line-height: 1.6;
-		max-width: 720px;
-		color: var(--text-muted);
-	}
-
 	.contact-details {
 		display: flex;
 		flex-direction: column;
@@ -631,6 +626,19 @@
 
 	.contact-email:hover {
 		opacity: 0.8;
+	}
+
+	.locations {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 20px;
+		width: 100%;
+	}
+
+	@media (max-width: 768px) {
+		.locations {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.contact-form {
@@ -744,10 +752,6 @@
 		.col-left {
 			width: 100%;
 			position: static;
-		}
-
-		.company-block h3 {
-			font-size: 26px;
 		}
 
 		.team-card {

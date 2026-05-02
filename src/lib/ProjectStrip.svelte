@@ -1,19 +1,36 @@
 <script lang="ts">
+	import ProjectScene from './ProjectScene.svelte';
+
 	interface Props {
 		name: string;
-		blurb: string;
+		tagline: string;
+		description: string;
 		href: string;
+		colors: [string, string, string, string];
+		screenshot: string;
+		align?: 'left' | 'right';
 	}
 
-	let { name, blurb, href }: Props = $props();
+	let {
+		name,
+		tagline,
+		description,
+		href,
+		colors,
+		screenshot,
+		align = 'right'
+	}: Props = $props();
 </script>
 
 <article class="project">
-	<div class="project-card"></div>
+	<div class="project-card">
+		<ProjectScene {colors} {screenshot} {align} />
+	</div>
 	<div class="project-info">
 		<div class="project-text">
 			<h2>{name}</h2>
-			<p class="blurb">{blurb}</p>
+			<p class="tagline">{tagline}</p>
+			<p class="description">{description}</p>
 		</div>
 		<a class="button" {href} target="_blank" rel="noopener noreferrer">
 			Visit {name} <span aria-hidden="true">→</span>
@@ -29,18 +46,11 @@
 	}
 
 	.project-card {
+		position: relative;
+		overflow: hidden;
 		min-height: 80dvh;
 		border-radius: 20px;
-		background:
-			linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%),
-			linear-gradient(180deg, #0d0d0d 0%, #030303 100%);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-top-color: rgba(255, 255, 255, 0.2);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.14),
-			inset 0 -1px 0 rgba(0, 0, 0, 0.55),
-			inset 0 0 80px rgba(255, 255, 255, 0.02),
-			0 2px 6px rgba(0, 0, 0, 0.4);
+		background: #000000;
 	}
 
 	.project-info {
@@ -64,10 +74,19 @@
 		line-height: 1.1;
 	}
 
-	.blurb {
-		font-size: 16px;
+	.tagline {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.4;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.description {
+		font-size: 15px;
 		line-height: 1.6;
 		color: var(--text-muted);
+		white-space: pre-line;
 		margin: 0;
 	}
 

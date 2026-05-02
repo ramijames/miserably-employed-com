@@ -9,6 +9,7 @@
 
 	let canvas: HTMLCanvasElement;
 	let container: HTMLDivElement;
+	let loading = $state(true);
 
 	onMount(() => {
 		const scene = new THREE.Scene();
@@ -189,6 +190,10 @@
 			raf = requestAnimationFrame(animate);
 		}
 		animate();
+		// First frame is on the GPU — hide the spinner.
+		requestAnimationFrame(() => {
+			loading = false;
+		});
 
 		function onResize() {
 			const nw = container.clientWidth;
@@ -218,6 +223,9 @@
 
 <div class="hero-scene" bind:this={container}>
 	<canvas bind:this={canvas}></canvas>
+	{#if loading}
+		<div class="scene-loading"></div>
+	{/if}
 </div>
 
 <style>
