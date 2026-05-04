@@ -294,11 +294,10 @@
 				</dd>
 			</div>
 			<div class="contact-row">
-				<dt>Locations</dt>
+				<dt>Headquarters</dt>
 				<dd>
 					<div class="locations">
-						<LocationMap lat={26.5629} lng={-81.9495} label="Cape Coral, FL" />
-						<LocationMap lat={42.3318} lng={-71.1212} label="Brookline, MA" />
+						<LocationMap lat={42.3601} lng={-71.0589} label="Boston, MA" />
 					</div>
 				</dd>
 			</div>
@@ -627,6 +626,9 @@
 		font-family: var(--font-sans);
 		font-size: 16px;
 		color: var(--text);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
 	}
 
 	.contact-email {
@@ -641,15 +643,9 @@
 
 	.locations {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr;
 		gap: 20px;
 		width: 100%;
-	}
-
-	@media (max-width: 768px) {
-		.locations {
-			grid-template-columns: 1fr;
-		}
 	}
 
 	.contact-form {
